@@ -62,11 +62,23 @@ class App extends Component {
 
   onStatusChange = (Id) => {
     const index = this.state.List.findIndex((elem) => elem.Id === Id);
+    let newList = this.state.List.slice();
+    console.log("before newList ", newList[index].Status)
+    if (newList[index].Status === "Inactive") {
+      newList[index].Status = "Active"
+    }
+    console.log("after newList ", newList[index].Status)
 
+    this.setState(() => {
+      return {
+        List: newList
+      }
+    })
   }
 
   render() {
     const { List } = this.state;
+    console.log("APP state => ", this.state)
     return (
       <Fragment>
         <Header />
