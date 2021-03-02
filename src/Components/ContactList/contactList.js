@@ -2,11 +2,12 @@ import React, { Fragment } from "react";
 
 import ContactItem from "./ContactItem/contactItem";
 
-const ContactList = ({ List }) => {
+const ContactList = ({ List, onStatusChange }) => {
     const item = List.map(contact => {
         return (
             <ContactItem Id={contact.Id} key={contact.Id} Avatar={contact.Avatar} Gender={contact.Gender} Name={contact.Name} Created={contact.Created}
-                Role={contact.Role} Status={contact.Status} Email={contact.Email} />
+                Role={contact.Role} Status={contact.Status} Email={contact.Email}
+                onStatusChange={() => onStatusChange(contact.Id)} />
         )
     })
     return (
