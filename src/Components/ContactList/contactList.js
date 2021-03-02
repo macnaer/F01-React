@@ -5,7 +5,7 @@ import ContactItem from "./ContactItem/contactItem";
 const ContactList = ({ List }) => {
     const item = List.map(contact => {
         return (
-            <ContactItem Avatar={contact.Avatar} Name={contact.Name} Created={contact.Created}
+            <ContactItem Id={contact.Id} key={contact.Id} Avatar={contact.Avatar} Gender={contact.Gender} Name={contact.Name} Created={contact.Created}
                 Role={contact.Role} Status={contact.Status} Email={contact.Email} />
         )
     })
