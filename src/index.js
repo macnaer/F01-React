@@ -2,6 +2,13 @@ import React, { Fragment, Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+// Router
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 // Import uuid
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,7 +16,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Components
 import Header from "./Components/Header/header";
-import Search from "./Components/Search/search";
 import ContactList from "./Components/ContactList/contactList";
 import Footer from "./Components/Footer/footer";
 
@@ -92,10 +98,15 @@ class App extends Component {
     return (
       <Fragment>
         <Header />
-        <Search />
-        <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />
+        <Router>
+          <Switch>
+            <Route path="/" exact render={() => <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
+
+          </Switch>
+        </Router>
         <Footer />
       </Fragment>
+
     )
   }
 }
