@@ -97,14 +97,14 @@ class App extends Component {
     console.log("APP state => ", this.state)
     return (
       <Fragment>
-        <Header />
         <Router>
+          <Header />
           <Switch>
             <Route path="/" exact render={() => <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
 
           </Switch>
+          <Footer />
         </Router>
-        <Footer />
       </Fragment>
 
     )
