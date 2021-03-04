@@ -60,14 +60,24 @@ class App extends Component {
     ]
   }
 
+  onDelete = (Id) => {
+    const index = this.state.List.findIndex((elem) => elem.Id === Id);
+    const partOne = this.state.List.slice(0, index);
+    const partTwo = this.state.List.slice(index + 1);
+    const newList = [...partOne, ...partTwo];
+    this.setState(() => {
+      return {
+        List: newList,
+      };
+    });
+  }
+
   onStatusChange = (Id) => {
     const index = this.state.List.findIndex((elem) => elem.Id === Id);
     let newList = this.state.List.slice();
-    console.log("before newList ", newList[index].Status)
     if (newList[index].Status === "Inactive") {
       newList[index].Status = "Active"
     }
-    console.log("after newList ", newList[index].Status)
 
     this.setState(() => {
       return {
@@ -83,7 +93,7 @@ class App extends Component {
       <Fragment>
         <Header />
         <Search />
-        <ContactList List={List} onStatusChange={this.onStatusChange} />
+        <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />
         <Footer />
       </Fragment>
     )
