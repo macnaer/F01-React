@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Header from "./Components/Header/header";
 import ContactList from "./Components/ContactList/contactList";
 import Footer from "./Components/Footer/footer";
+import AddNewContact from "./Components/AddNewContact/AddNewContact";
 
 class App extends Component {
 
@@ -101,7 +102,7 @@ class App extends Component {
           <Header />
           <Switch>
             <Route path="/" exact render={() => <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
-
+            <Route path="/add-contact" exact render={() => <AddNewContact />} />
           </Switch>
           <Footer />
         </Router>
