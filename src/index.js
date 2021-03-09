@@ -19,6 +19,7 @@ import Header from "./Components/Header/header";
 import ContactList from "./Components/ContactList/contactList";
 import Footer from "./Components/Footer/footer";
 import AddNewContact from "./Components/AddNewContact/AddNewContact";
+import NotFound from "./Components/NotFound/NotFound";
 
 class App extends Component {
 
@@ -103,6 +104,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact render={() => <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
             <Route path="/add-contact" exact render={() => <AddNewContact />} />
+            <Route component={NotFound} />
           </Switch>
           <Footer />
         </Router>
