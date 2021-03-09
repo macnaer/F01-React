@@ -80,6 +80,16 @@ class App extends Component {
     });
   }
 
+  onAddContact = (newContact) => {
+    const tmpList = this.state.List.slice();
+    const newList = [...tmpList, newContact];
+    this.setState(() => {
+      return {
+        List: newList
+      }
+    })
+  }
+
   onStatusChange = (Id) => {
     const index = this.state.List.findIndex((elem) => elem.Id === Id);
     let newList = this.state.List.slice();
@@ -96,14 +106,13 @@ class App extends Component {
 
   render() {
     const { List } = this.state;
-    console.log("APP state => ", this.state)
     return (
       <Fragment>
         <Router>
           <Header />
           <Switch>
             <Route path="/" exact render={() => <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
-            <Route path="/add-contact" exact render={() => <AddNewContact />} />
+            <Route path="/add-contact" exact render={() => <AddNewContact onAddContact={this.onAddContact} />} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

@@ -1,4 +1,6 @@
 import React, { Fragment } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { Redirect } from "react-router-dom";
 
 
 class AddNewContact extends React.Component {
@@ -10,7 +12,8 @@ class AddNewContact extends React.Component {
         "Role": "",
         "Status": "",
         "Email": "",
-        "Gender": "women"
+        "Gender": "women",
+        "isRedirect": false
     }
 
     getAvatar = (event) => {
@@ -46,17 +49,28 @@ class AddNewContact extends React.Component {
     addNewContact = (event) => {
         event.preventDefault();
         const { Avatar, Name, Email, Role, Status, Gender } = this.state;
-        let Created = Date.now();
 
-        const newContact = { Avatar, Name, Email, Role, Status, Gender, Created };
-        console.log("newContact = ", newContact);
+        let Created = Date.now();
+        const Id = uuidv4();
+        const newContact = { Id, Avatar, Name, Created, Role, Status, Gender, Email };
+        const { onAddContact } = this.props;
+        onAddContact(newContact);
+        this.setState({
+            isRedirect: true
+        })
 
     }
 
 
 
     render() {
-        const { Name, Gender, Avatar } = this.state;
+        const { Name, Gender, Avatar, isRedirect } = this.state;
+        if (isRedirect) {
+            return (
+                <Redirect to="/" />
+            )
+        }
+
         const URL = `https://randomuser.me/api/portraits/${Gender}/${Avatar}.jpg`;
         return (
             <Fragment>
