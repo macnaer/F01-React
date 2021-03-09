@@ -25,13 +25,39 @@ class AddNewContact extends React.Component {
         })
     }
 
+    getEmail = (event) => {
+        this.setState({
+            Email: event.target.value
+        })
+    }
+
+    getRole = (event) => {
+        this.setState({
+            Role: event.target.value
+        })
+    }
+
+    getStatus = (event) => {
+        this.setState({
+            Status: event.target.value
+        })
+    }
+
+    addNewContact = (event) => {
+        event.preventDefault();
+        const { Avatar, Name, Email, Role, Status, Gender } = this.state;
+        let Created = Date.now();
+
+        const newContact = { Avatar, Name, Email, Role, Status, Gender, Created };
+        console.log("newContact = ", newContact);
+
+    }
+
 
 
     render() {
         const { Name, Gender, Avatar } = this.state;
         const URL = `https://randomuser.me/api/portraits/${Gender}/${Avatar}.jpg`;
-
-        console.log("State ", this.state);
         return (
             <Fragment>
                 <div className="container">
@@ -63,7 +89,7 @@ class AddNewContact extends React.Component {
                                             <div className="row pv-lg">
                                                 <div className="col-lg-2"></div>
                                                 <div className="col-lg-8">
-                                                    <form className="form-horizontal ng-pristine ng-valid">
+                                                    <form onSubmit={this.addNewContact} className="form-horizontal ng-pristine ng-valid">
                                                         <div className="form-group">
                                                             <label className="col-sm-2 control-label"
                                                                 htmlFor="inputContact1">Name</label>
@@ -84,43 +110,34 @@ class AddNewContact extends React.Component {
                                                             <label className="col-sm-2 control-label"
                                                                 htmlFor="inputContact2">Email</label>
                                                             <div className="col-sm-10">
-                                                                <input className="form-control" id="inputContact2"
-                                                                    type="email" name='email' value="" />
+                                                                <input onChange={this.getEmail} className="form-control" id="inputContact2"
+                                                                    type="email" name='email' placeholder="Email" />
                                                             </div>
                                                         </div>
                                                         <div className="form-group">
                                                             <label className="col-sm-2 control-label"
                                                                 htmlFor="inputContact3">Role</label>
                                                             <div className="col-sm-10">
-                                                                <input className="form-control" id="inputContact3"
-                                                                    type="text" value="" name='role' />
+                                                                <input onChange={this.getRole} className="form-control" id="inputContact3"
+                                                                    type="text" name='role' placeholder="role" />
                                                             </div>
                                                         </div>
                                                         <div className="form-group">
                                                             <label className="col-sm-2 control-label"
                                                                 htmlFor="inputContact4">Status</label>
                                                             <div className="col-sm-10">
-                                                                <input className="form-control" id="inputContact4"
-                                                                    type="text" value="" />
+                                                                <input onChange={this.getStatus} className="form-control" id="inputContact4"
+                                                                    type="text" placeholder="Status" />
                                                             </div>
                                                         </div>
-                                                        <div className="form-group">
+                                                        {/* <div className="form-group">
                                                             <label className="col-sm-2 control-label"
                                                                 htmlFor="inputContact5">Gender</label>
                                                             <div className="col-sm-10">
                                                                 <input className="form-control" id="inputContact5"
                                                                     type="text" value="" />
                                                             </div>
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label className="col-sm-2 control-label"
-                                                                htmlFor="inputContact6">Address</label>
-                                                            <div className="col-sm-10">
-                                                                <textarea className="form-control" id="inputContact6"
-                                                                    row="4"></textarea>
-                                                            </div>
-                                                        </div>
-
+                                                        </div> */}
 
                                                         <div className="form-group">
                                                             <div className="col-sm-offset-2 col-sm-10">
