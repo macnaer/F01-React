@@ -65,7 +65,8 @@ class App extends Component {
         "Email": "mj@gmail.com",
         "Gender": "men"
       }
-    ]
+    ],
+    currentContact: ""
   }
 
   onDelete = (Id) => {
@@ -90,6 +91,11 @@ class App extends Component {
     })
   }
 
+  onEdit = (Id) => {
+    const index = this.state.List.findIndex((elem) => elem.Id === Id);
+    console.log("Index ", index);
+  }
+
   onStatusChange = (Id) => {
     const index = this.state.List.findIndex((elem) => elem.Id === Id);
     let newList = this.state.List.slice();
@@ -111,7 +117,7 @@ class App extends Component {
         <Router>
           <Header />
           <Switch>
-            <Route path="/" exact render={() => <ContactList List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
+            <Route path="/" exact render={() => <ContactList onEdit={this.onEdit} List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
             <Route path="/add-contact" exact render={() => <AddNewContact onAddContact={this.onAddContact} />} />
             <Route component={NotFound} />
           </Switch>
