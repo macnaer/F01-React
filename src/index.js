@@ -24,50 +24,86 @@ import EditContact from "./Components/EditContact/editContact";
 
 class App extends Component {
 
+  URL = "https://f01-fr-default-rtdb.firebaseio.com/List.json"
   state = {
-    List: [
-      {
-        "Id": uuidv4(),
-        "Avatar": "20",
-        "Name": "Mila Kunis",
-        "Created": "2013/08/08",
-        "Role": "Admin",
-        "Status": "Inactive",
-        "Email": "mila@kunis.com",
-        "Gender": "women"
-      },
-      {
-        "Id": uuidv4(),
-        "Avatar": "50",
-        "Name": "Camil Jonson",
-        "Created": "2013/08/08",
-        "Role": "User",
-        "Status": "Pending",
-        "Email": "camil@gmail.com",
-        "Gender": "men"
-      },
-      {
-        "Id": uuidv4(),
-        "Avatar": "33",
-        "Name": "Jenifer Jonson",
-        "Created": "2013/08/03",
-        "Role": "Moderator",
-        "Status": "Active",
-        "Email": "jj@gmail.com",
-        "Gender": "women"
-      },
-      {
-        "Id": uuidv4(),
-        "Avatar": "46",
-        "Name": "Mikle Jekson",
-        "Created": "2013/08/03",
-        "Role": "Moderator",
-        "Status": "Banned",
-        "Email": "mj@gmail.com",
-        "Gender": "men"
-      }
-    ],
+    // List: [
+    //   {
+    //     "Id": uuidv4(),
+    //     "Avatar": "20",
+    //     "Name": "Mila Kunis",
+    //     "Created": "2013/08/08",
+    //     "Role": "Admin",
+    //     "Status": "Inactive",
+    //     "Email": "mila@kunis.com",
+    //     "Gender": "women"
+    //   },
+    //   {
+    //     "Id": uuidv4(),
+    //     "Avatar": "50",
+    //     "Name": "Camil Jonson",
+    //     "Created": "2013/08/08",
+    //     "Role": "User",
+    //     "Status": "Pending",
+    //     "Email": "camil@gmail.com",
+    //     "Gender": "men"
+    //   },
+    //   {
+    //     "Id": uuidv4(),
+    //     "Avatar": "33",
+    //     "Name": "Jenifer Jonson",
+    //     "Created": "2013/08/03",
+    //     "Role": "Moderator",
+    //     "Status": "Active",
+    //     "Email": "jj@gmail.com",
+    //     "Gender": "women"
+    //   },
+    //   {
+    //     "Id": uuidv4(),
+    //     "Avatar": "46",
+    //     "Name": "Mikle Jekson",
+    //     "Created": "2013/08/03",
+    //     "Role": "Moderator",
+    //     "Status": "Banned",
+    //     "Email": "mj@gmail.com",
+    //     "Gender": "men"
+    //   }
+    // ],
+    List: [],
     currentContact: ""
+  }
+
+  componentDidMount() {
+    this.updateDatabase();
+  }
+
+  updateDatabase = () => {
+    fetch(this.URL)
+      .then(responce => {
+        return responce.json();
+      }).then(data => {
+        if (data !== null) {
+          this.setState(() => {
+            return {
+              List: data
+            }
+          })
+        }
+
+      })
+      .catch(err => console.log(err))
+
+  }
+
+  saveData = (contactList) => {
+    fetch(this.URL, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(contactList),
+    }).then(responce => {
+      console.log("saveDate responce => ", responce)
+    }).catch(err => console.log(err));
   }
 
   onDelete = (Id) => {
@@ -90,6 +126,7 @@ class App extends Component {
         List: newList
       }
     })
+    this.saveData(newList)
   }
 
   onEdit = (Id) => {

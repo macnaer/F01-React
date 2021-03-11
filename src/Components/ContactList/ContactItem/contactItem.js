@@ -4,6 +4,30 @@ import "./contactItem.css";
 
 class ContactItem extends Component {
 
+    // componentDidMount() {
+    //     console.log("componentDidMount ")
+    // }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("nextProps => ", nextProps)
+    //     console.log("nextState => ", nextState)
+    //     if (nextProps.Status === "Active") {
+    //         console.log("Active ")
+    //         // return false
+    //         return true
+    //     }
+    //     else {
+    //         return true;
+    //     }
+    // }
+    // componentDidUpdate() {
+    //     console.log("componentDidUpdate ")
+    // }
+
+    // componentWillUnmount() {
+    //     console.log("componentWillUnmount")
+    // }
+
     render() {
         // console.log("contact ITEM PROPS => ", this.props)
         const { onStatusChange, onDelete, onEdit } = this.props;
