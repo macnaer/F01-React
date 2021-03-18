@@ -12,6 +12,10 @@ import {
 // Import uuid
 import { v4 as uuidv4 } from 'uuid';
 
+// Redux store
+import store from "./store";
+import { Provider } from "react-redux";
+
 
 
 // Components
@@ -26,48 +30,6 @@ class App extends Component {
 
   URL = "https://f01-fr-default-rtdb.firebaseio.com/List.json"
   state = {
-    // List: [
-    //   {
-    //     "Id": uuidv4(),
-    //     "Avatar": "20",
-    //     "Name": "Mila Kunis",
-    //     "Created": "2013/08/08",
-    //     "Role": "Admin",
-    //     "Status": "Inactive",
-    //     "Email": "mila@kunis.com",
-    //     "Gender": "women"
-    //   },
-    //   {
-    //     "Id": uuidv4(),
-    //     "Avatar": "50",
-    //     "Name": "Camil Jonson",
-    //     "Created": "2013/08/08",
-    //     "Role": "User",
-    //     "Status": "Pending",
-    //     "Email": "camil@gmail.com",
-    //     "Gender": "men"
-    //   },
-    //   {
-    //     "Id": uuidv4(),
-    //     "Avatar": "33",
-    //     "Name": "Jenifer Jonson",
-    //     "Created": "2013/08/03",
-    //     "Role": "Moderator",
-    //     "Status": "Active",
-    //     "Email": "jj@gmail.com",
-    //     "Gender": "women"
-    //   },
-    //   {
-    //     "Id": uuidv4(),
-    //     "Avatar": "46",
-    //     "Name": "Mikle Jekson",
-    //     "Created": "2013/08/03",
-    //     "Role": "Moderator",
-    //     "Status": "Banned",
-    //     "Email": "mj@gmail.com",
-    //     "Gender": "men"
-    //   }
-    // ],
     List: [],
     currentContact: ""
   }
@@ -102,7 +64,6 @@ class App extends Component {
       },
       body: JSON.stringify(contactList),
     }).then(responce => {
-      console.log("saveDate responce => ", responce)
     }).catch(err => console.log(err));
   }
 
@@ -168,7 +129,7 @@ class App extends Component {
   render() {
     const { List, currentContact } = this.state;
     return (
-      <Fragment>
+      <Provider store={store}>
         <Router>
           <Header />
           <Switch>
@@ -179,8 +140,7 @@ class App extends Component {
           </Switch>
           <Footer />
         </Router>
-      </Fragment >
-
+      </Provider >
     )
   }
 }
