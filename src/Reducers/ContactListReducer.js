@@ -8,6 +8,10 @@ const ContactListReducer = (state = initialState, action) => {
             return {
                 List: action.payload
             }
+        case "ADD_NEW_CONTACT":
+            return {
+                List: action.payload
+            }
         default:
             return state;
     }
