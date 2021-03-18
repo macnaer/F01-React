@@ -29,16 +29,7 @@ import EditContact from "./Components/EditContact/editContact";
 class App extends Component {
 
 
-  // saveData = (contactList) => {
-  //   fetch(this.URL, {
-  //     method: "PUT",
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(contactList),
-  //   }).then(responce => {
-  //   }).catch(err => console.log(err));
-  // }
+
 
   // onDelete = (Id) => {
   //   const index = this.state.List.findIndex((elem) => elem.Id === Id);
