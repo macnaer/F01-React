@@ -5,21 +5,20 @@ import { getAllContacts } from "../../Actions/ContactListActions";
 
 import ContactItem from "./ContactItem/contactItem";
 
-const ContactList = ({ List, getAllContacts }) => {
+const ContactList = ({ List, currentContact, getAllContacts }) => {
 
     useEffect(() => {
         updateDatabase().then(data => {
             getAllContacts(data);
         })
+    }, [])
 
-    })
+    // const item = List.map(contact => {
+    //     return (
+    //         <ContactItem Id={contact.Id} key={contact.Id} Avatar={contact.Avatar} Gender={contact.Gender} Name={contact.Name} Created={contact.Created}
+    //             Role={contact.Role} Status={contact.Status} Email={contact.Email} />
+    //     )
 
-    const item = List.map(contact => {
-        return (
-            <ContactItem Id={contact.Id} key={contact.Id} Avatar={contact.Avatar} Gender={contact.Gender} Name={contact.Name} Created={contact.Created}
-                Role={contact.Role} Status={contact.Status} Email={contact.Email} />
-        )
-    })
     return (
         <Fragment>
             <div className="container">
@@ -38,7 +37,15 @@ const ContactList = ({ List, getAllContacts }) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {item.length > 0 ? item : <h2>Contact list is empty</h2>}
+                                        {currentContact.length === 0 ? List.map(contact => {
+                                            return (
+                                                <ContactItem key={contact.Id} {...contact} />
+                                            )
+                                        }) : currentContact.map(contact => {
+                                            return (
+                                                <ContactItem key={contact.Id} {...contact} />
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
@@ -52,8 +59,9 @@ const ContactList = ({ List, getAllContacts }) => {
 }
 
 const mapStateToProps = ({ ContactListReducer }) => {
-    const { List } = ContactListReducer;
-    return { List }
+    console.log("ContactListReducer ", ContactListReducer);
+    const { List, currentContact } = ContactListReducer;
+    return { List, currentContact }
 }
 const mapDispatchToProps = {
     getAllContacts

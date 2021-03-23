@@ -11,3 +11,10 @@ export const addNewContact = (contactList) => {
         payload: contactList
     }
 }
+
+export const searchContact = (name) => {
+    return {
+        type: "SEARCH_CONTACT",
+        payload: name
+    }
+}

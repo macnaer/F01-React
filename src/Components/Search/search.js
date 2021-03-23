@@ -1,6 +1,12 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import { searchContact } from "../../Actions/ContactListActions";
 
-const Search = () => {
+const Search = ({ searchContact }) => {
+
+    const onSearch = (event) => {
+        searchContact(event.target.value)
+    }
     return (
         <Fragment>
             <div className="container">
@@ -8,10 +14,10 @@ const Search = () => {
                     <div className="col-lg-12">
                         <nav className="navbar navbar-light bg-light">
                             <div className="container-fluid">
-                                <form className="d-flex">
-                                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                </form>
+                                <div className="d-flex">
+                                    <input onChange={onSearch} className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+
+                                </div>
                             </div>
                         </nav>
                     </div>
@@ -20,4 +26,8 @@ const Search = () => {
         </Fragment>
     )
 }
-export default Search;
+
+const mapDispatchToProps = {
+    searchContact
+}
+export default connect(null, mapDispatchToProps)(Search);
